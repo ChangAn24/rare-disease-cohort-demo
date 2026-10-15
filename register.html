@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#123e4b">
-  <meta name="description" content="罕见病公益多组学科研队列患者信息登记演示页面。">
-  <title>患者信息登记｜罕见病公益多组学科研队列</title>
+  <meta name="description" content="先填写患者信息，再选择申请书和知情同意书两份签署文件。当前为不收存资料的前端演示。">
+  <title>登记与签署文件｜罕见病公益多组学科研队列</title>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23123e4b'/%3E%3Cpath d='M17 32h30M32 17v30' stroke='%238ce2d2' stroke-width='7' stroke-linecap='round'/%3E%3Ccircle cx='32' cy='32' r='7' fill='%23fff'/%3E%3C/svg%3E">
   <style>
     :root{font-family:Inter,"Noto Sans SC","Microsoft YaHei",system-ui,sans-serif;color:#203943;background:#f3f7f7;font-synthesis:none}
@@ -21,7 +21,7 @@
     .story-main{position:relative;margin:auto 0;max-width:520px;padding:80px 0}
     .eyebrow{display:flex;align-items:center;gap:12px;color:#8ce2d2;font-size:13px;font-weight:700;letter-spacing:.18em}
     .eyebrow::before{content:"";width:32px;height:1px;background:currentColor}
-    h1{margin:24px 0 23px;font-size:clamp(39px,4.3vw,68px);line-height:1.16;letter-spacing:-.045em;font-weight:700}
+    h1{margin:24px 0 23px;font-size:clamp(32px,3.6vw,56px);line-height:1.25;letter-spacing:-.045em;font-weight:700}
     .story-main p{max-width:440px;margin:0;color:#c4d8db;font-size:16px;line-height:1.9}
     .steps{position:relative;display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:520px;padding-top:21px;border-top:1px solid #5c8189}
     .step{font-size:13px;color:#c4d8db;line-height:1.45}
@@ -39,6 +39,19 @@
     .notice-icon{display:grid;place-items:center;flex:none;width:21px;height:21px;border:1.5px solid #4b8791;border-radius:50%;color:#3d7882;font-size:13px;font-weight:700}
     .notice p{margin:0}
     form{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 18px}
+    fieldset{grid-column:1/-1;min-width:0;margin:0;padding:0;border:0}
+    #registration-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+    legend{padding:0 0 18px;color:#29464e;font-size:18px;font-weight:700}
+    [hidden]{display:none!important}
+    .file-card{margin-bottom:20px;padding:20px;border:1px solid #cbdadb;border-radius:12px;background:#fff}
+    input[type=file]{height:auto;min-height:48px;padding:10px;font-size:14px}
+    input[type=file]::file-selector-button{padding:8px 12px;margin-right:10px;border:0;border-radius:6px;background:#e5f2ef;color:#183c45;cursor:pointer}
+    .file-card p,.upload-help{font-size:14px;color:#557078;line-height:1.8}
+    .file-card a,.download-links a{color:#14777b;text-decoration:underline;text-underline-offset:3px}
+    .download-links{margin:0 0 24px;font-size:14px;line-height:2}
+    .secondary{padding:12px 16px;border:1px solid #b4ccce;border-radius:10px;color:#29464e;background:#fff;font-size:14px}
+    .secondary:focus-visible{outline:3px solid #86d8d1;outline-offset:3px}
+    @media(max-width:640px){#registration-fields{grid-template-columns:1fr}.secondary{margin-bottom:12px}}
     .field{min-width:0}
     .field.wide{grid-column:1/-1}
     label{display:block;margin-bottom:9px;color:#29464e;font-size:14px;font-weight:650}
@@ -46,7 +59,7 @@
     input,select{width:100%;height:48px;padding:0 14px;border:1px solid #cbdadb;border-radius:10px;outline:none;background:#fff;color:#203943;font-size:15px;transition:border-color .2s,box-shadow .2s}
     input::placeholder{color:#96a8ac}
     input:focus,select:focus{border-color:#2e8c8c;box-shadow:0 0 0 3px #2e8c8c22}
-    input:invalid:not(:placeholder-shown){border-color:#ca8273}
+    input:not([type=file]):invalid:not(:placeholder-shown){border-color:#ca8273}
     .hint{margin:7px 0 0;color:#748e94;font-size:12px;line-height:1.5}
     .submit-row{grid-column:1/-1;display:flex;align-items:center;justify-content:space-between;gap:18px;margin-top:9px}
     .submit-note{margin:0;color:#738c91;font-size:12px;line-height:1.55}
@@ -67,20 +80,23 @@
       <div class="story-main">
         <div class="eyebrow">PATIENT REGISTRATION</div>
         <h1 id="site-title">让每一份信息，<br>成为研究的起点。</h1>
-        <p>请填写患者基本信息与采样情况，完成科研队列信息登记。整个过程大约需要 2 分钟。</p>
+        <p>请先下载并按要求签署两份文件，填写登记信息后，再选择签署文件。当前为演示流程，资料不会上传或保存。</p>
       </div>
       <div class="steps" aria-label="登记流程">
-        <div class="step"><strong>01</strong>填写基本信息</div>
-        <div class="step"><strong>02</strong>补充采样情况</div>
-        <div class="step"><strong>03</strong>核对后提交</div>
+        <div class="step"><strong>01</strong>下载并签署</div>
+        <div class="step"><strong>02</strong>填写登记信息</div>
+        <div class="step"><strong>03</strong>选择签署文件</div>
       </div>
     </section>
     <section class="form-side" aria-labelledby="form-title">
       <div class="form-wrap">
         <a class="back" href="./">← 返回首页</a>
-        <div class="form-head"><div><small>队列登记 / 01</small><h2 id="form-title">患者信息登记</h2></div><span class="badge">前端演示</span></div>
-        <div class="notice" role="note"><span class="notice-icon" aria-hidden="true">i</span><p>当前为演示页面。填写内容不会上传或保存，请勿输入真实的身份证号码或其他敏感信息。</p></div>
+        <div class="form-head"><div><small id="step-label">步骤 02 / 填写登记信息</small><h2 id="form-title" tabindex="-1">患者信息登记</h2></div><span class="badge">前端演示</span></div>
+        <div class="notice" role="note"><span class="notice-icon" aria-hidden="true">i</span><p>尚未接入接收资料的后台。登记信息与所选文件都不会上传或保存，请使用虚构信息和测试文件。</p></div>
+        <p class="download-links">还没有文件？下载：<a href="documents/genome-data-application.pdf" download="个人基因组原始数据申请书.pdf">个人基因组原始数据申请书</a> · <a href="documents/informed-consent.pdf" download="知情同意书.pdf">知情同意书</a></p>
         <form id="patient-form" autocomplete="off">
+          <noscript>请启用 JavaScript 后体验登记流程。当前页面不接收任何资料。</noscript>
+          <fieldset id="registration-fields" disabled><legend>七项登记信息</legend>
           <div class="field"><label for="name">姓名 <span aria-hidden="true">*</span></label><input id="name" name="name" type="text" placeholder="请输入姓名" maxlength="50" required></div>
           <div class="field"><label for="contact">联系方式 <span aria-hidden="true">*</span></label><input id="contact" name="contact" type="tel" inputmode="tel" placeholder="请输入手机或联系电话" maxlength="30" required></div>
           <div class="field"><label for="email">邮箱 <span aria-hidden="true">*</span></label><input id="email" name="email" type="email" placeholder="name@example.com" maxlength="254" required></div>
@@ -88,8 +104,14 @@
           <div class="field"><label for="disease">病种 <span aria-hidden="true">*</span></label><input id="disease" name="disease" type="text" placeholder="例如：肌萎缩侧索硬化症" maxlength="100" required></div>
           <div class="field"><label for="tissue">组织类型 <span aria-hidden="true">*</span></label><select id="tissue" name="tissue" required><option value="" selected disabled>请选择组织类型</option><option>外周血</option><option>血清</option><option>血浆</option><option>唾液</option><option>皮肤组织</option><option>肌肉组织</option><option>其他</option></select></div>
           <div class="field wide"><label for="sample-date">采样时间 <span aria-hidden="true">*</span></label><input id="sample-date" name="sampleDate" type="date" required><p class="hint">请选择实际采样日期</p></div>
-          <div class="submit-row"><p class="submit-note">带 * 的项目均需填写。点击提交仅演示表单反馈。</p><button class="submit" type="submit">提交信息（演示）</button></div>
-          <p class="feedback" id="feedback" role="status" aria-live="polite" hidden>演示提交成功。信息未上传或保存，感谢体验。</p>
+          </fieldset>
+          <fieldset id="upload-fields" hidden disabled><legend>两份签署文件</legend>
+            <p class="upload-help">请分别选择完整的申请书和知情同意书。每份为一个 PDF，大小不超过 20 MB。当前演示只检查文件格式与大小，不核验签名或文件内容。</p>
+            <div class="file-card"><label for="signed-application">已签署的个人基因组原始数据申请书 <span aria-hidden="true">*</span></label><input id="signed-application" name="signedApplication" type="file" accept=".pdf,application/pdf" aria-describedby="application-hint" required><p id="application-hint">请包含全部页面，确保填写与签名清晰。</p></div>
+            <div class="file-card"><label for="signed-consent">已签署的知情同意书 <span aria-hidden="true">*</span></label><input id="signed-consent" name="signedConsent" type="file" accept=".pdf,application/pdf" aria-describedby="consent-hint" required><p id="consent-hint">请包含全部页面，确保填写与签名清晰。</p></div>
+          </fieldset>
+          <div class="submit-row"><button class="secondary" id="edit-info" type="button" hidden>← 修改登记信息</button><p class="submit-note" id="step-note">带 * 的项目均需填写。</p><button class="submit" id="next-step" type="button">下一步：选择签署文件</button><button class="submit" id="check-files" type="submit" hidden>检查提交材料（演示）</button></div>
+          <p class="feedback" id="feedback" role="status" aria-live="polite" hidden>演示检查完成：已填写登记信息并选择两份 PDF。资料未发送给项目组，也未上传或保存。正式接收功能尚未开通。</p>
         </form>
       </div>
     </section>
@@ -98,15 +120,53 @@
     const form = document.getElementById('patient-form');
     const feedback = document.getElementById('feedback');
     const sampleDate = document.getElementById('sample-date');
+    const registration = document.getElementById('registration-fields');
+    const uploads = document.getElementById('upload-fields');
+    const next = document.getElementById('next-step');
+    const edit = document.getElementById('edit-info');
+    const check = document.getElementById('check-files');
+    const heading = document.getElementById('form-title');
+    const fileInputs = ['signed-application', 'signed-consent'].map(id => document.getElementById(id));
     const today = new Date();
     sampleDate.max = new Date(today.getTime() - today.getTimezoneOffset() * 60000).toISOString().slice(0, 10);
+    function fileError(file) {
+      if (!file) return '请选择这份签署文件。';
+      if (!/\.pdf$/i.test(file.name) || (file.type && file.type !== 'application/pdf')) return '请选择 PDF 文件；照片请先合并为 PDF。';
+      if (file.size === 0) return '文件为空，请重新选择。';
+      if (file.size > 20 * 1024 * 1024) return '文件超过 20 MB，请压缩后重新选择。';
+      return '';
+    }
+    function setUploadStep(active) {
+      registration.hidden = active;
+      uploads.hidden = uploads.disabled = !active;
+      next.hidden = active;
+      edit.hidden = check.hidden = !active;
+      document.getElementById('step-note').hidden = active;
+      document.getElementById('step-label').textContent = active ? '步骤 03 / 选择签署文件' : '步骤 02 / 填写登记信息';
+      heading.textContent = active ? '选择签署文件' : '患者信息登记';
+      feedback.hidden = true;
+      heading.focus();
+    }
+    next.addEventListener('click', () => {
+      for (const input of registration.querySelectorAll('input[type=text], input[type=tel]')) input.value = input.value.trim();
+      if (form.reportValidity()) setUploadStep(true);
+    });
+    edit.addEventListener('click', () => setUploadStep(false));
+    for (const input of fileInputs) input.addEventListener('change', () => {
+      input.setCustomValidity(fileError(input.files[0]));
+      feedback.hidden = true;
+      input.reportValidity();
+    });
     form.addEventListener('submit', (event) => {
       event.preventDefault();
+      if (uploads.disabled) { next.click(); return; }
+      for (const input of fileInputs) input.setCustomValidity(fileError(input.files[0]));
+      if (!form.reportValidity()) return;
       feedback.hidden = false;
-      form.reset();
-      feedback.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+      feedback.scrollIntoView({ block: 'nearest' });
     });
     form.addEventListener('input', () => { feedback.hidden = true; });
+    registration.disabled = false;
   </script>
 </body>
 </html>

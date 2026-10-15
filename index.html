@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#123e4b">
-  <meta name="description" content="关注罕见病患者，支持公益多组学科研。了解队列初衷并体验患者信息登记流程。">
+  <meta name="description" content="下载个人基因组原始数据申请书和知情同意书，填写患者登记信息，体验签署文件提交流程。">
   <title>罕见病公益多组学科研队列</title>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23123e4b'/%3E%3Cpath d='M17 32h30M32 17v30' stroke='%238ce2d2' stroke-width='7' stroke-linecap='round'/%3E%3Ccircle cx='32' cy='32' r='7' fill='%23fff'/%3E%3C/svg%3E">
   <style>
@@ -53,6 +53,14 @@
     .value .number{display:block;margin-bottom:31px;color:#3c9692;font-size:14px;font-weight:700}
     .value h3{margin:0 0 10px;font-size:23px}
     .value p{margin:0;color:#607880;font-size:15px;line-height:1.75}
+    .downloads{padding:65px 0;background:#e5f2ef;scroll-margin-top:20px}
+    .download-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:20px;margin:28px 0}
+    .download-card{padding:26px;background:white;border:1px solid #cbdeda;border-radius:14px}
+    .download-card h3{margin:10px 0;font-size:22px}
+    .download-card p{color:#557078;line-height:1.7;font-size:16px}
+    .download-card .primary{background:#147f82;color:white;box-shadow:none}
+    .download-card small{color:#33827f;font-size:14px}
+    .download-note{color:#49646b;line-height:1.8;font-size:15px}
     .closing{padding:46px 0;background:#e5f2ef}
     .closing-grid{display:flex;align-items:center;justify-content:space-between;gap:30px}
     .closing h2{font-size:clamp(24px,2.5vw,33px)}
@@ -69,7 +77,7 @@
   <header>
     <div class="shell nav">
       <a class="brand" href="./" aria-label="罕见病公益多组学科研队列首页"><span class="mark" aria-hidden="true">＋</span><span>罕见病公益多组学科研队列</span></a>
-      <nav aria-label="主导航"><a href="#mission">项目初衷</a><a class="nav-cta" href="register.html">进入登记</a></nav>
+      <nav aria-label="主导航"><a href="#documents">下载文件</a><a class="nav-cta" href="register.html">登记与上传</a></nav>
     </div>
   </header>
   <main>
@@ -79,11 +87,22 @@
           <div class="eyebrow">罕见病 · 公益科研</div>
           <h1 id="hero-title">让每一种罕见，<br><span>都值得被看见。</span></h1>
           <p class="lead">每一位患者的经历都独一无二。我们希望从清晰记录患者与采样信息开始，为罕见病多组学研究留下一份更完整的线索。</p>
-          <div class="hero-actions"><a class="primary" href="register.html">开始信息登记 <span aria-hidden="true">↗</span></a><small>当前为前端演示，不会上传或保存填写内容</small></div>
+          <div class="hero-actions"><a class="primary" href="#documents">下载需要签署的文件 <span aria-hidden="true">↓</span></a><a href="register.html">已准备好文件，前往登记 →</a></div>
+          <p class="download-note" style="color:#c4dcdf">下载并阅读两份文件 → 填写登记信息 → 选择签署文件<br>当前为前端演示，登记信息与所选文件均不会上传或保存。</p>
         </div>
         <div class="visual" aria-hidden="true"><div class="visual-inner"><p><b>FOR EVERY RARE STORY</b>让罕见<br>被看见</p></div></div>
       </div>
     </section>
+    <section class="downloads" id="documents" aria-labelledby="documents-title"><div class="shell">
+      <p class="kicker">01 / 下载与签署</p><h2 id="documents-title">请先阅读这两份文件</h2>
+      <p class="download-note">请完整阅读并按文件要求填写、签署。如有疑问，请先与项目组沟通。签署后，将每份文件的全部页面分别扫描为一个清晰的 PDF。</p>
+      <div class="download-grid">
+        <article class="download-card"><small>PDF · 3 页 · 约 308 KB</small><h3>个人基因组原始数据申请书</h3><p>下载原始申请书，阅读后按适用要求填写和签署。</p><a class="primary" href="documents/genome-data-application.pdf" download="个人基因组原始数据申请书.pdf">下载申请书 <span aria-hidden="true">↓</span></a></article>
+        <article class="download-card"><small>PDF · 9 页 · 约 249 KB</small><h3>知情同意书</h3><p>下载原始知情同意书，充分理解后自主决定是否签署。</p><a class="primary" href="documents/informed-consent.pdf" download="知情同意书.pdf">下载知情同意书 <span aria-hidden="true">↓</span></a></article>
+      </div>
+      <p class="download-note">下载文件后，可进入登记页体验后续流程。上传步骤目前仅作演示，请使用不含真实个人信息的测试文件。</p>
+      <a class="primary" href="register.html">下一步：填写登记信息 <span aria-hidden="true">→</span></a>
+    </div></section>
     <section class="section" id="mission" aria-labelledby="mission-title">
       <div class="shell">
         <div class="section-head"><p class="kicker">OUR PURPOSE / 公益初衷</p><h2 id="mission-title">从看见开始，向理解前行。</h2><p>罕见病公益科研需要关注真实的患者经历，也需要有序、准确的信息。我们希望让每一份线索都得到认真对待。</p></div>
@@ -94,7 +113,7 @@
         </div>
       </div>
     </section>
-    <section class="closing" aria-labelledby="closing-title"><div class="shell closing-grid"><div><h2 id="closing-title">愿更多罕见，被认真看见。</h2><p>登记页目前仅供体验，请勿填写真实身份证号码或其他敏感信息。</p></div><a class="primary" href="register.html">前往登记页面 <span aria-hidden="true">↗</span></a></div></section>
+    <section class="closing" aria-labelledby="closing-title"><div class="shell closing-grid"><div><h2 id="closing-title">准备好文件，再开始登记。</h2><p>请先填写七项登记信息，再选择两份签署文件。当前流程仅供演示。</p></div><a class="primary" href="register.html">登记与上传 <span aria-hidden="true">↗</span></a></div></section>
   </main>
   <footer><div class="shell">罕见病公益多组学科研队列 · 前端演示页面</div></footer>
 </body>
